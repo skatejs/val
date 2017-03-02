@@ -1,4 +1,4 @@
-# val
+# VAL
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -13,7 +13,7 @@
 [coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/user/repo
 
-# Better VDOM / DOM integration
+## Better VDOM / DOM integration
 
 The goal of this wrapper is to provide a consistent interface across all virtual DOM solutions that provide a hyperscript-style virtual DOM function. This includes, but is not limited to:
 
