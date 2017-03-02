@@ -1,4 +1,4 @@
-# VAL
+# Val
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
