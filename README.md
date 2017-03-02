@@ -23,6 +23,10 @@ The goal of this wrapper is to provide a consistent interface across all virtual
 - Hyperscript (any implementation)
 - ...
 
+```sh
+npm install @skatejs/val
+```
+
 ## Rationale
 
 The problems these different implemenations face is that the only common thing is the function that you invoke and the arguments that it accepts, at a top level. However, they all behave differently with the arguments you give them.
