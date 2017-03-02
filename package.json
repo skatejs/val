@@ -1,6 +1,5 @@
 {
   "name": "@skatejs/val",
-  "version": "0.0.0",
   "description": "VirtualDOM abstraction layer - give yourself better integration and full control over the DOM with any major virtual DOM library that uses a Hyperscript-like API such as React and Preact.",
   "main": "lib/index.js",
   "module": "es/index.js",
