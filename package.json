@@ -1,6 +1,6 @@
 {
-  "name": "val",
-  "version": "1.0.0",
+  "name": "@skatejs/val",
+  "version": "0.0.0",
   "description": "Describe val here",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,6 +12,7 @@
   "scripts": {
     "build": "nwb build-web-module",
     "clean": "nwb clean-module",
+    "prepublish": "npm run build",
     "test": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server"
@@ -21,8 +22,8 @@
   "devDependencies": {
     "nwb": "0.15.x"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Trey Shugart <treshugart@gmail.com>",
+  "homepage": "https://github.com/skatejs/val",
   "license": "MIT",
-  "repository": ""
+  "repository": "https://github.com/skatejs/val"
 }
