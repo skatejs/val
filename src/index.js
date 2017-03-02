@@ -4,11 +4,13 @@ const cacheCtorLocalNames = new Map();
 const cacheElementEventHandlers = new WeakMap();
 
 // Override customElements.define() to cache constructor local names.
-const { define } = customElements;
-customElements.define = (name, Ctor) => {
-  cacheCtorLocalNames.set(Ctor, name);
-  return define(name, Ctor);
-};
+if (customElements) {
+  const { define } = customElements;
+  customElements.define = (name, Ctor) => {
+    cacheCtorLocalNames.set(Ctor, name);
+    return define(name, Ctor);
+  };
+}
 
 // Applies attributes to the ref element. It doesn't traverse through
 // existing attributes and assumes that the supplied object will supply
@@ -92,7 +94,7 @@ function ensureLocalName (lname) {
 // It requires support for:
 // - `ref`
 export default function (createElement) {
-  return function (lname, attrs, ...chren) {
+  return function (lname = 'div', attrs, ...chren) {
     lname = ensureLocalName(lname);
     attrs = typeof lname === 'string' ? ensureAttrs(lname, attrs) : attrs;
     return createElement(lname, attrs, ...chren);

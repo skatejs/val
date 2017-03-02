@@ -1,9 +1,55 @@
-import expect from 'expect'
+import expect from 'expect';
+import val from 'src';
 
-import message from 'src/index'
+const { customElements, Event, HTMLElement } = window;
 
-describe('Module template', () => {
-  it('displays a welcome message', () => {
-    expect(message).toContain('Welcome to val')
-  })
-})
+describe('Val', () => {
+  it('should take a function', () => {
+    const fn = val(() => {});
+    expect(fn).toBeA('function');
+  });
+
+  it('h() (no arguments) basic argument shapes', () => {
+    const fn = val((...args) => args);
+    const args = fn();
+    
+    expect(args.length).toBe(2);
+    expect(args[0]).toBe('div');
+    expect(args[1]).toBeAn('object');
+
+    const props = args[1];
+
+    expect(Object.getOwnPropertyNames(props).length).toBe(1);
+    expect(props.ref).toBeA('function');
+  });
+
+  it('h(nodeName)', () => {
+    expect(val(name => name)('test')).toBe('test');
+  });
+
+  it('h(nodeName, { prop, attrs, events })', () => {
+    let triggered = false;
+    const fn = val((name, props) => {
+      const el = document.createElement(name);
+      props.ref(el);
+      return el;
+    });
+    const div = fn('div', {
+      prop: true,
+      attrs: { attr: true },
+      events: { customevent: () => (triggered = true) }
+    });
+
+    expect(div.prop).toBe(true);
+    expect(div.getAttribute('attr')).toBe('true');
+
+    div.dispatchEvent(new Event('customevent'));
+    expect(triggered).toBe(true);
+  });
+
+  customElements && it('custom element constructor', () => {
+    class Test extends HTMLElement {}
+    customElements.define('x-test', Test);
+    expect(val(ctor => ctor)(Test)).toBe('x-test');
+  });
+});

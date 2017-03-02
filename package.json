@@ -9,16 +9,15 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-web-module",
-    "clean": "nwb clean-module",
-    "prepublish": "npm run build",
+    "prepublish": "nwb build-web-module",
     "test": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "jsdom": "^9.11.0",
+    "karma-jsdom-launcher": "^5.0.0",
     "nwb": "0.15.x"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",

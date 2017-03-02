@@ -3,5 +3,9 @@ module.exports = {
   npm: {
     esModules: true,
     umd: true
+  },
+  karma: {
+    browsers: ['jsdom'],
+    plugins: [require('karma-jsdom-launcher')]
   }
 };
