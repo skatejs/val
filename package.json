@@ -23,5 +23,6 @@
   "author": "Trey Shugart <treshugart@gmail.com>",
   "homepage": "https://github.com/skatejs/val",
   "license": "MIT",
-  "repository": "https://github.com/skatejs/val"
+  "repository": "https://github.com/skatejs/val",
+  "version": "0.0.0"
 }
