@@ -63,7 +63,7 @@ React:
 import { createElement } from 'react';
 import makeCreateElement from './make-create-element';
 
-export makeCreateElement(createElement);
+export default makeCreateElement(createElement);
 ```
 
 Preact:
@@ -73,7 +73,7 @@ Preact:
 import { h } from 'preact';
 import makeH from './make-create-element';
 
-export makeH(h);
+export default makeH(h);
 ```
 
 In your components, you'd then import your wrapped function instead of the one from the library.
