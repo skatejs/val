@@ -61,9 +61,9 @@ React:
 
 ```js
 import { createElement } from 'react';
-import makeCreateElement from './make-create-element';
+import val from '@skatejs/val';
 
-export default makeCreateElement(createElement);
+export default val(createElement);
 ```
 
 Preact:
@@ -71,9 +71,9 @@ Preact:
 
 ```js
 import { h } from 'preact';
-import makeH from './make-create-element';
+import val from '@skatejs/val';
 
-export default makeH(h);
+export default val(h);
 ```
 
 In your components, you'd then import your wrapped function instead of the one from the library.
