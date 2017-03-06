@@ -17,7 +17,9 @@ if (customElements) {
 // all attributes that the applicator should care about, even ones that
 // should be removed.
 function applyAttrs (e, attrs) {
-  Object.keys(attrs || {}).forEach(name => {
+  if(!attrs) return;
+
+  Object.keys(attrs).forEach(name => {
     const value = attrs[name];
     if (value == null) {
       e.removeAttribute(name);
