@@ -62,7 +62,7 @@ function applyRef (e, ref) {
 }
 
 // Ensures attrs, events and props are all set as the consumer intended.
-function ensureAttrs (name, objs) {
+function ensureAttrs (objs) {
   const { attrs, events, ref, ...props } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
   return { ref: newRef };
@@ -96,7 +96,7 @@ function ensureLocalName (lname) {
 export default function (createElement) {
   return function (lname = 'div', attrs, ...chren) {
     lname = ensureLocalName(lname);
-    attrs = typeof lname === 'string' ? ensureAttrs(lname, attrs) : attrs;
+    attrs = typeof lname === 'string' ? ensureAttrs(attrs) : attrs;
     return createElement(lname, attrs, ...chren);
   };
 }
