@@ -27,9 +27,9 @@ function applyAttrs (e, attrs) {
   });
 }
 
-function applyEvents (e, events) {
+function applyEvents (e, events = {}) {
   const handlers = cacheElementEventHandlers.get(e) || {};
-  cacheElementEventHandlers.set(e, events = events || {});
+  cacheElementEventHandlers.set(e, events);
 
   // Remove any old listeners that are different - or aren't specified
   // in - the new set.
@@ -40,7 +40,7 @@ function applyEvents (e, events) {
   });
 
   // Bind new listeners.
-  Object.keys(events || {}).forEach(name => {
+  Object.keys(events).forEach(name => {
     if (events[name] !== handlers[name]) {
       e.addEventListener(name, events[name]);
     }
