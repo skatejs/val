@@ -1,7 +1,19 @@
 {
   "name": "@skatejs/val",
   "description": "VirtualDOM abstraction layer - give yourself better integration and full control over the DOM with any virtual DOM library that uses a Hyperscript-like API such as React and Preact.",
-  "keywords": ["virtual", "dom", "vdom", "react", "preact", "virtual-dom", "web", "components", "custom", "elements", "integration"],
+  "keywords": [
+    "virtual",
+    "dom",
+    "vdom",
+    "react",
+    "preact",
+    "virtual-dom",
+    "web",
+    "components",
+    "custom",
+    "elements",
+    "integration"
+  ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -25,5 +37,5 @@
   "homepage": "https://github.com/skatejs/val",
   "license": "MIT",
   "repository": "https://github.com/skatejs/val",
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
