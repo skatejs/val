@@ -17,7 +17,9 @@ if (customElements) {
 // all attributes that the applicator should care about, even ones that
 // should be removed.
 function applyAttrs (e, attrs) {
-  Object.keys(attrs || {}).forEach(name => {
+  if(!attrs) return;
+
+  Object.keys(attrs).forEach(name => {
     const value = attrs[name];
     if (value == null) {
       e.removeAttribute(name);
@@ -27,9 +29,9 @@ function applyAttrs (e, attrs) {
   });
 }
 
-function applyEvents (e, events) {
+function applyEvents (e, events = {}) {
   const handlers = cacheElementEventHandlers.get(e) || {};
-  cacheElementEventHandlers.set(e, events = events || {});
+  cacheElementEventHandlers.set(e, events);
 
   // Remove any old listeners that are different - or aren't specified
   // in - the new set.
@@ -40,7 +42,7 @@ function applyEvents (e, events) {
   });
 
   // Bind new listeners.
-  Object.keys(events || {}).forEach(name => {
+  Object.keys(events).forEach(name => {
     if (events[name] !== handlers[name]) {
       e.addEventListener(name, events[name]);
     }
@@ -62,7 +64,7 @@ function applyRef (e, ref) {
 }
 
 // Ensures attrs, events and props are all set as the consumer intended.
-function ensureAttrs (name, objs) {
+function ensureAttrs (objs) {
   const { attrs, events, ref, ...props } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
   return { ref: newRef };
@@ -96,7 +98,7 @@ function ensureLocalName (lname) {
 export default function (createElement) {
   return function (lname = 'div', attrs, ...chren) {
     lname = ensureLocalName(lname);
-    attrs = typeof lname === 'string' ? ensureAttrs(lname, attrs) : attrs;
+    attrs = typeof lname === 'string' ? ensureAttrs(attrs) : attrs;
     return createElement(lname, attrs, ...chren);
   };
 }
