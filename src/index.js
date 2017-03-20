@@ -8,7 +8,7 @@ if (customElements) {
   const { define } = customElements;
   customElements.define = (name, Ctor) => {
     cacheCtorLocalNames.set(Ctor, name);
-    return define(name, Ctor);
+    return define.call(customElements, name, Ctor);
   };
 }
 
