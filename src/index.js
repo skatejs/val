@@ -67,7 +67,7 @@ function applyRef (e, ref) {
 function ensureAttrs (objs) {
   const { attrs, events, ref, key, ...props } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
-  return { ref: newRef, ...(key ? { key } : {}) }
+  return { ref: newRef, ...(key !== undefined ? { key } : {}) }
 }
 
 // Ensures a ref is supplied that set each member appropriately and that
