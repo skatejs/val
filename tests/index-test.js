@@ -52,4 +52,9 @@ describe('Val', () => {
     customElements.define('x-test', Test);
     expect(val(ctor => ctor)(Test)).toBe('x-test');
   });
+
+  it('h(nodeName, { key })', () => {
+    expect(val((name,props) => props)('test', { key: 'foo' }).key).toBe('foo');
+  });
+  
 });
