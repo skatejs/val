@@ -63,11 +63,11 @@ function applyRef (e, ref) {
   }
 }
 
-// Ensures attrs, events and props are all set as the consumer intended.
+  // Ensures attrs, events and props are all set as the consumer intended.
 function ensureAttrs (objs) {
-  const { attrs, events, ref, ...props } = objs || {};
+  const { attrs, events, ref, key, ...props } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
-  return { ref: newRef };
+  return { ref: newRef, ...(key ? { key } : {}) }
 }
 
 // Ensures a ref is supplied that set each member appropriately and that
