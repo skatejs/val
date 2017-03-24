@@ -1,7 +1,7 @@
 
 const { customElements } = window;
 const cacheCtorLocalNames = new Map();
-const cacheElementEventHandlers = new WeakMap();
+export const cacheElementEventHandlers = new WeakMap();
 
 // Override customElements.define() to cache constructor local names.
 if (customElements) {
