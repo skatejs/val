@@ -19,7 +19,7 @@ describe('Val', () => {
 
     const props = args[1];
 
-    expect(Object.getOwnPropertyNames(props).length).toBe(1);
+    expect(Object.getOwnPropertyNames(props)).toInclude('ref');
     expect(props.ref).toBeA('function');
   });
 
