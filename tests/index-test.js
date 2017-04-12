@@ -20,6 +20,7 @@ describe('Val', () => {
     const props = args[1];
 
     expect(Object.getOwnPropertyNames(props)).toInclude('ref');
+    expect(Object.getOwnPropertyNames(props)).toInclude('dangerouslySetInnerHTML');
     expect(props.ref).toBeA('function');
   });
 
