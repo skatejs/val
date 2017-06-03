@@ -98,13 +98,11 @@ render(<ReactComponent />, document.getElementById('root'));
 
 ### Real DOM
 
-Val ships with a default adapter that generates real DOM nodes. To do this, simply pass no arguments to the `val()` function:
+Val ships with a default adapter that generates real DOM nodes. To do this, simply import the `h` function:
 
 ```js
 /** @jsx h*/
-import val from '@skatejs/val';
-
-const h = val();
+import { h } from '@skatejs/val';
 
 // <div>test</div>
 console.log(<div>test</div>.outerHTML);
