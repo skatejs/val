@@ -15,12 +15,13 @@
 
 ## Better VDOM / DOM integration
 
-The goal of this wrapper is to provide a consistent interface across all virtual DOM solutions that provide a hyperscript-style virtual DOM function. This includes, but is not limited to:
+The goal of this wrapper is to provide a consistent interface across all virtual DOM solutions that provide a hyperscript-style virtual DOM function, but also provide a default interface for creating real DOM. This includes, but is not limited to:
 
 - React
 - Preact
 - Virtual DOM
 - Hyperscript (any implementation)
+- Real DOM
 - ...
 
 ```sh
@@ -94,6 +95,24 @@ class ReactComponent extends PureComponent {
 
 render(<ReactComponent />, document.getElementById('root'));
 ```
+
+### Real DOM
+
+Val ships with a default adapter that generates real DOM nodes. To do this, simply pass no arguments to the `val()` function:
+
+```js
+/** @jsx h*/
+import val from '@skatejs/val';
+
+const h = val();
+
+// <div>test</div>
+console.log(<div>test</div>.outerHTML);
+```
+
+Everything works as advertised, so you can still pass custom elements, attributes and events as you normally would and things just work.
+
+Being able to do this is immensely useful for testing real DOM and web components. Apply liberally!
 
 ### Attributes
 
