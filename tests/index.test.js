@@ -1,10 +1,9 @@
 /** @jsx h */
 
 require('@skatejs/ssr');
-const val = require('../src').default;
+const { default: val, h } = require('../src');
 
 const { customElements, Event, HTMLElement } = window;
-const h = val();
 
 function empty (value) {
   expect(value == null).toEqual(true);

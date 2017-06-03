@@ -104,10 +104,12 @@ function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
 //
 // It requires support for:
 // - `ref`
-export default function (createElement = defaultCreateElement) {
+export default function val (createElement = defaultCreateElement) {
   return function (lname, attrs, ...chren) {
     lname = ensureLocalName(lname);
     attrs = ensureAttrs(attrs);
     return createElement(lname, attrs, ...chren);
   };
 }
+
+export const h = val();
