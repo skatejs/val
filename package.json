@@ -14,28 +14,33 @@
     "elements",
     "integration"
   ],
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "umd/@skatejs/val.js",
   "files": [
-    "es",
-    "lib",
     "umd"
   ],
   "scripts": {
-    "prepublish": "nwb build-web-module",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "prepublish": "nwb build",
+    "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
-    "jsdom": "^9.11.0",
-    "karma-jsdom-launcher": "^5.0.0",
-    "nwb": "0.15.x"
+    "@skatejs/ssr": "^0.3.0",
+    "jest": "^20.0.4",
+    "nwb": "^0.16.3"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",
   "homepage": "https://github.com/skatejs/val",
   "license": "MIT",
   "repository": "https://github.com/skatejs/val",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "babel": {
+    "presets": [
+      "stage-0",
+      "es2015",
+      "react"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "@skatejs/ssr/jest"
+  }
 }

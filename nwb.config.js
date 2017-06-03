@@ -1,11 +1,8 @@
 module.exports = {
   type: 'web-module',
   npm: {
-    esModules: true,
+    cjs: false,
+    esModules: false,
     umd: true
-  },
-  karma: {
-    browsers: ['jsdom'],
-    plugins: [require('karma-jsdom-launcher')]
   }
 };

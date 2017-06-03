@@ -1,9 +1,10 @@
-
 const { customElements } = window;
 const cacheCtorLocalNames = new Map();
 const cacheElementEventHandlers = new WeakMap();
 
-// Override customElements.define() to cache constructor local names.
+// Override customElements.define() to cache constructor local names. This is
+// required for all virtual DOM implementations that don't natively support
+// custom element constructors as node names.
 if (customElements) {
   const { define } = customElements;
   customElements.define = (name, Ctor) => {
@@ -63,7 +64,7 @@ function applyRef (e, ref) {
   }
 }
 
-  // Ensures attrs, events and props are all set as the consumer intended.
+// Ensures attrs, events and props are all set as the consumer intended.
 function ensureAttrs (objs) {
   const { attrs, events, ref, key, ...props } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
@@ -90,15 +91,23 @@ function ensureLocalName (lname) {
   return temp || lname;
 }
 
+// Default adapter for rendering DOM.
+function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
+  const node = typeof lname === 'function' ? new lname() : document.createElement(lname);
+  if (ref) ref(node);
+  chren.forEach(c => node.appendChild(c));
+  return node;
+}
+
 // Provides a function that takes the original createElement that is being
 // wrapped. It returns a function that you call like you normally would.
 //
 // It requires support for:
 // - `ref`
-export default function (createElement) {
-  return function (lname = 'div', attrs, ...chren) {
+export default function (createElement = defaultCreateElement) {
+  return function (lname, attrs, ...chren) {
     lname = ensureLocalName(lname);
-    attrs = typeof lname === 'string' ? ensureAttrs(attrs) : attrs;
+    attrs = ensureAttrs(attrs);
     return createElement(lname, attrs, ...chren);
   };
 }
