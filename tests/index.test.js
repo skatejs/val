@@ -108,4 +108,12 @@ describe('Default adapter (DOM)', () => {
     expect(dom.clickTriggered).toEqual(true);
     expect(dom.customTriggered).toEqual(true);
   });
+
+  it('creating with children', () => {
+    const dom = (
+      <div>
+        <span>test</span>
+      </div>
+    );
+  });
 });
