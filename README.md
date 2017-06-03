@@ -7,7 +7,7 @@
 
 ## Better VDOM / DOM integration
 
-The goal of this wrapper is to provide a consistent interface across all virtual DOM solutions that provide a hyperscript-style virtual DOM function, but also provide a default interface for creating real DOM. This includes, but is not limited to:
+The goal of this wrapper is to provide a consistent interface across all virtual DOM solutions that provide a hyperscript-style virtual DOM function, and also provide a default interface for creating real DOM. This includes, but is not limited to:
 
 - React
 - Preact
