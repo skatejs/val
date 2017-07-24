@@ -48,6 +48,12 @@ describe('Custom adapter', () => {
   it('h(nodeName, { key })', () => {
     expect(val((name,props) => props)('test', { key: 'foo' }).key).toBe('foo');
   });
+
+  it('h(nodeName, { is })', () => {
+    const fn = val((name, { is }) => is);
+
+    expect(fn('button', { is: 'fancy-button'})).toBe('fancy-button');
+  });
 });
 
 describe('Default adapter (DOM)', () => {
