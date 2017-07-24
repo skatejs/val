@@ -7,9 +7,9 @@ const cacheElementEventHandlers = new WeakMap();
 // custom element constructors as node names.
 if (customElements) {
   const { define } = customElements;
-  customElements.define = (name, Ctor) => {
-    cacheCtorLocalNames.set(Ctor, name);
-    return define.call(customElements, name, Ctor);
+  customElements.define = (name, Ctor, options = {}) => {
+    cacheCtorLocalNames.set(Ctor, options.extends || name);
+    return define.call(customElements, name, Ctor, options);
   };
 }
 
@@ -66,9 +66,9 @@ function applyRef (e, ref) {
 
 // Ensures attrs, events and props are all set as the consumer intended.
 function ensureAttrs (objs) {
-  const { attrs, events, ref, key, ...props } = objs || {};
+  const { attrs, events, ref, key, ...{ is, ...props } } = objs || {};
   const newRef = ensureRef({ attrs, events, props, ref });
-  return { ref: newRef, key }
+  return { ref: newRef, key, is };
 }
 
 // Ensures a ref is supplied that set each member appropriately and that
@@ -92,8 +92,8 @@ function ensureLocalName (lname) {
 }
 
 // Default adapter for rendering DOM.
-function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
-  const node = typeof lname === 'function' ? new lname() : document.createElement(lname);
+function defaultCreateElement (lname, { ref, is, ...attrs }, ...chren) {
+  const node = typeof lname === 'function' ? new lname() : document.createElement(lname, { is });
   if (ref) ref(node);
   chren.forEach(c => node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
   return node;

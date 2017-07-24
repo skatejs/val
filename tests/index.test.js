@@ -48,6 +48,23 @@ describe('Custom adapter', () => {
   it('h(nodeName, { key })', () => {
     expect(val((name,props) => props)('test', { key: 'foo' }).key).toBe('foo');
   });
+
+  it('h(nodeName, { is })', () => {
+    const fn = val((name, { is }) => is);
+
+    expect(fn('button', { is: 'fancy-button'})).toBe('fancy-button');
+  });
+
+  customElements && it('constructor for customised built-ins', () => {
+    // Should extend from HTMLButtonElement, but currently unavailable in @skatejs/ssr
+    class FancyButton extends HTMLElement {}
+    customElements.define('fancy-button', FancyButton, { extends: 'button' });
+
+    const { lname, is } = val((lname, { is }) => ({ lname, is }))(FancyButton);
+
+    expect(lname).toBe('button');
+    expect(is).toBe('fancy-button');
+  });
 });
 
 describe('Default adapter (DOM)', () => {
@@ -115,5 +132,21 @@ describe('Default adapter (DOM)', () => {
         <span>test</span>
       </div>
     );
+  });
+
+  describe('handling customised built-ins', () => {
+    beforeAll(() => {
+      jest.spyOn(document, 'createElement');
+    });
+
+    afterAll(() => {
+      document.createElement.mockRestore();
+    });
+
+    it('calls createElement correctly', () => {
+      const dom = <button is="custom-element"></button>;
+
+      expect(document.createElement).toHaveBeenCalledWith('button', { is: 'custom-element' });
+    });
   });
 });
