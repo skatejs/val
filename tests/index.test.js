@@ -54,6 +54,13 @@ describe('Custom adapter', () => {
 
     expect(fn('button', { is: 'fancy-button'})).toBe('fancy-button');
   });
+
+  customElements && it('constructor for customised built-ins', () => {
+    // Should extend from HTMLButtonElement, but currently unavailable in @skatejs/ssr
+    class Test extends HTMLElement {}
+    customElements.define('x-test', Test, { extends: 'button' });
+    expect(val(ctor => ctor)(Test)).toBe('button');
+  });
 });
 
 describe('Default adapter (DOM)', () => {

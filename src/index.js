@@ -7,9 +7,9 @@ const cacheElementEventHandlers = new WeakMap();
 // custom element constructors as node names.
 if (customElements) {
   const { define } = customElements;
-  customElements.define = (name, Ctor) => {
-    cacheCtorLocalNames.set(Ctor, name);
-    return define.call(customElements, name, Ctor);
+  customElements.define = (name, Ctor, options = {}) => {
+    cacheCtorLocalNames.set(Ctor, options.extends || name);
+    return define.call(customElements, name, Ctor, options);
   };
 }
 
