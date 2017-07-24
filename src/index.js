@@ -92,8 +92,8 @@ function ensureLocalName (lname) {
 }
 
 // Default adapter for rendering DOM.
-function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
-  const node = typeof lname === 'function' ? new lname() : document.createElement(lname);
+function defaultCreateElement (lname, { ref, is, ...attrs }, ...chren) {
+  const node = typeof lname === 'function' ? new lname() : document.createElement(lname, { is });
   if (ref) ref(node);
   chren.forEach(c => node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
   return node;

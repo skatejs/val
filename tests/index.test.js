@@ -129,4 +129,20 @@ describe('Default adapter (DOM)', () => {
       </div>
     );
   });
+
+  describe('handling customised built-ins', () => {
+    beforeAll(() => {
+      jest.spyOn(document, 'createElement');
+    });
+
+    afterAll(() => {
+      document.createElement.mockRestore();
+    });
+
+    it('calls createElement correctly', () => {
+      const dom = <button is="custom-element"></button>;
+
+      expect(document.createElement).toHaveBeenCalledWith('button', { is: 'custom-element' });
+    });
+  });
 });
