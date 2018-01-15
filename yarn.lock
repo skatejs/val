@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@skatejs/ssr@^0.3.0":
+"@skatejs/ssr@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@skatejs/ssr/-/ssr-0.3.0.tgz#d50f8a7fcefb30e2209e00d4ded83c866227c8f7"
   dependencies:
@@ -3528,7 +3528,7 @@ jest-validate@^20.0.3:
     leven "^2.1.0"
     pretty-format "^20.0.3"
 
-jest@^20.0.4:
+jest@20.0.4:
   version "20.0.4"
   resolved "https://registry.yarnpkg.com/jest/-/jest-20.0.4.tgz#3dd260c2989d6dad678b1e9cc4d91944f6d602ac"
   dependencies:
@@ -4288,7 +4288,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nwb@^0.16.3:
+nwb@0.16.3:
   version "0.16.3"
   resolved "https://registry.yarnpkg.com/nwb/-/nwb-0.16.3.tgz#f9f609d2ac6a2fbd4fa975988c640e1583f19fee"
   dependencies:
