@@ -48,6 +48,14 @@ describe('Custom adapter', () => {
   it('h(nodeName, { key })', () => {
     expect(val((name,props) => props)('test', { key: 'foo' }).key).toBe('foo');
   });
+
+  it('h(nodeName, { dangerouslySetInnerHTML })', () => {
+    const div = val((name,props) => props)('div', {
+        dangerouslySetInnerHTML: 'foo'
+    });
+
+    expect(div.dangerouslySetInnerHTML).toBe('foo');
+  });
 });
 
 describe('Default adapter (DOM)', () => {
