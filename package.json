@@ -24,7 +24,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@skatejs/ssr": "0.3.0",
+    "@skatejs/ssr": "0.19.1",
     "jest": "20.0.4",
     "nwb": "0.16.3"
   },
