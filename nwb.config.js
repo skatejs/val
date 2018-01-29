@@ -1,8 +1,8 @@
 module.exports = {
-  type: 'web-module',
+  type: "web-module",
   npm: {
     cjs: false,
     esModules: false,
-    umd: true
+    umd: "val"
   }
 };
