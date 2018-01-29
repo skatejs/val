@@ -14,9 +14,11 @@
     "elements",
     "integration"
   ],
-  "main": "umd/@skatejs/val.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
-    "umd"
+    "lib",
+    "es"
   ],
   "scripts": {
     "prepublish": "nwb build",
