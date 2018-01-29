@@ -24,7 +24,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@skatejs/ssr": "0.3.0",
+    "@skatejs/ssr": "0.19.1",
+    "babel-jest": "^22.1.0",
     "jest": "22.1.4",
     "nwb": "0.16.3"
   },
