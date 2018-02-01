@@ -29,7 +29,7 @@
     "@skatejs/ssr": "0.19.1",
     "babel-jest": "22.1.0",
     "jest": "22.1.4",
-    "nwb": "0.21.3"
+    "nwb": "0.21.5"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",
   "homepage": "https://github.com/skatejs/val",
