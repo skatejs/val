@@ -61,14 +61,14 @@ function ensureRef (ref, props) {
         // instead of calling indexOf() several times.
         const firstPart = name.substring(0, 5);
         const value = props[name];
-        if (firstPart === 'aria-' || firstPart === 'data-') {
-          applyAttr(e, name, value);
-        } else if (firstPart === 'attr-') {
-          applyAttr(e, name.substring(5), value);
+        if (name in e) {
+          e[name] = value;
+        } else if (name[0] === '$') {
+          e[name.substring(1)] = value;
         } else if (name.match(EVENT_REGEX)) {
           applyEvent(e, name[2].toLowerCase() + name.substring(3), value);
         } else {
-          e[name] = value;
+          applyAttr(e, name, value);
         }
       });
     }

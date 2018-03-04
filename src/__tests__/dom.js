@@ -20,13 +20,13 @@ test('creating elements by function', () => {
 test('setting attributes', () => {
   const div = <div
     aria-test='aria something'
-    attr-aria-who="Tony Hawk"
-    attr-who="Tony Hawk"
-    attr-deck="birdhouse"
-    attr-rating={10}
+    aria-who="Tony Hawk"
     data-test='data something'
-    test1='test something'
-    test2={1}
+    who="Tony Hawk"
+    deck="birdhouse"
+    rating={10}
+    $test1='test something'
+    $test2={1}
   />;
   expect(div.hasAttribute('aria-test')).toEqual(true);
   expect(div.hasAttribute('data-test')).toEqual(true);

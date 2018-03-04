@@ -19,12 +19,12 @@ test('h(nodeName, { prop, attrs, events })', () => {
     return el;
   });
   const div = fn('div', {
-    'attr-attr': true,
-    onCustomevent: () => (triggered = true),
-    prop: true
+    attr: true,
+    className: 'test',
+    onCustomevent: () => (triggered = true)
   });
 
-  expect(div.prop).toBe(true);
+  expect(div.className).toBe('test');
   expect(div.getAttribute('attr')).toBe('true');
 
   div.dispatchEvent(new Event('customevent'));
