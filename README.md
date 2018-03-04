@@ -37,10 +37,9 @@ Theres other issues such as React not working at all with custom events.
 The best solution I've come across so far is to create a wrapper that works for any of these. The wrapper enables several things:
 
 - Ability to pass a custom element constructor as the node name (first argument)
-- Explicit control over which attributes to set (via `attrs: {}` in the second argument)
-- Explicit control over which events are bound (via `events: {}` in the second argument)
-- Explicit control over which props are set (anything that isn't `attrs` or `events` in the second argument)
-- Everything else is just passed through and subject to the standard behaviour of whatever library you're using
+- Bind events using the `onEventName` syntax. The `on` is removed and the first character is lower-cased: `eventName`.
+- Props are passed if they're found on the element or they have a prefix of `$`.
+- Everything else is passed as an attribute.
 
 ## Requirements
 
@@ -104,45 +103,6 @@ Everything works as advertised, so you can still pass custom elements, attribute
 
 Being able to do this is immensely useful for testing real DOM and web components. Apply liberally!
 
-### Attributes
-
-Attributes are specified using the `attrs` object.
-
-```js
-import h from 'your-wrapper';
-
-h('my-element', {
-  attrs: {
-    'my-attribute': 'some value'
-  }
-});
-```
-
-### Events and custom events
-
-Events are bound using the `events` object. This works for any events, including custom events.
-
-```js
-import h from 'your-wrapper';
-
-h('my-element', {
-  events: {
-    click () {},
-    customevent () {}
-  }
-});
-```
-
-### Properties
-
-Properties are categorised as anything that is *not* `attrs` or `events`.
-
-```js
-h('my-element', {
-  someProp: true
-});
-```
-
 ### Custom element constructors
 
 You can also use your web component constructor instead of the name that was passed to `customElements.define()`.
@@ -156,4 +116,40 @@ customElements.define('web-component', WebComponent);
 
 // Now we can use it.
 h(WebComponent);
+```
+
+### Properties
+
+Properties are anything that is found in the element, or is prefixed with a `$`. The former works on most use-cases where the element has the property defined on its prototype. The latter is for use-cases where this may not be possible, such as custom elements that haven't been defined yet.
+
+```js
+h('my-element', {
+  someProp: true,
+  $someProp: true
+});
+```
+
+### Events and custom events
+
+Events are bound by prefixing the event name you want to bind with `on` and upper-casing the first character. The `on` is then removed and the first character of the event name is lower-cased. This is so that the event name is preserved as closely as possible to the original case.
+
+```js
+import h from 'your-wrapper';
+
+h('my-element', {
+  onClick () {},
+  onCustomevent () {}
+});
+```
+
+### Attributes
+
+Attributes are specified using the `attrs` object.
+
+```js
+import h from 'your-wrapper';
+
+h('my-element', {
+  myattribute: 'some value'
+});
 ```
