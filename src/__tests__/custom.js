@@ -19,9 +19,9 @@ test('h(nodeName, { prop, attrs, events })', () => {
     return el;
   });
   const div = fn('div', {
-    prop: true,
-    attrs: { attr: true },
-    events: { customevent: () => (triggered = true) }
+    'attr-attr': true,
+    onCustomevent: () => (triggered = true),
+    prop: true
   });
 
   expect(div.prop).toBe(true);

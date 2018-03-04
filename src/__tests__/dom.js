@@ -20,18 +20,16 @@ test('creating elements by function', () => {
 test('setting attributes', () => {
   const div = <div
     aria-test='aria something'
+    attr-aria-who="Tony Hawk"
+    attr-who="Tony Hawk"
+    attr-deck="birdhouse"
+    attr-rating={10}
     data-test='data something'
     test1='test something'
     test2={1}
-    attrs={{
-      'aria-who': 'Tony Hawk',
-      who: 'Tony Hawk',
-      deck: 'birdhouse',
-      rating: 10
-    }}
   />;
-  expect(div.hasAttribute('aria-test')).toEqual(false);
-  expect(div.hasAttribute('data-test')).toEqual(false);
+  expect(div.hasAttribute('aria-test')).toEqual(true);
+  expect(div.hasAttribute('data-test')).toEqual(true);
   expect(div.hasAttribute('test1')).toEqual(false);
   expect(div.hasAttribute('test2')).toEqual(false);
 
@@ -40,8 +38,8 @@ test('setting attributes', () => {
   expect(div.hasAttribute('deck')).toEqual(true);
   expect(div.hasAttribute('rating')).toEqual(true);
 
-  expect(div['aria-test']).toEqual('aria something');
-  expect(div['data-test']).toEqual('data something');
+  expect(div['aria-test']).toEqual(undefined);
+  expect(div['data-test']).toEqual(undefined);
   expect(div.test1).toEqual('test something');
   expect(div.test2).toEqual(1);
 
@@ -54,8 +52,7 @@ test('setting attributes', () => {
 test('setting events', () => {
   const click = (e) => { e.target.clickTriggered = true; };
   const custom = (e) => { e.target.customTriggered = true; };
-
-  const dom = <div events={{click, custom}} />;
+  const dom = <div onClick={click} onCustom={custom} />;
 
   dom.dispatchEvent(new Event('click'));
   dom.dispatchEvent(new CustomEvent('custom'));
