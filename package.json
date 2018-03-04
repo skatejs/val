@@ -27,11 +27,11 @@
   "dependencies": {},
   "devDependencies": {
     "@skatejs/ssr": "0.19.1",
-    "babel-jest": "22.1.0",
+    "babel-jest": "22.4.1",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "jest": "22.1.4",
+    "jest": "22.4.2",
     "nwb": "0.21.3"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",
