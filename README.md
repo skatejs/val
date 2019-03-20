@@ -36,11 +36,12 @@ Theres other issues such as React not working at all with custom events.
 
 The best solution I've come across so far is to create a wrapper that works for any of these. The wrapper enables several things:
 
-- Ability to pass a custom element constructor as the node name (first argument)
-- Explicit control over which attributes to set (via `attrs: {}` in the second argument)
-- Explicit control over which events are bound (via `events: {}` in the second argument)
-- Explicit control over which props are set (anything that isn't `attrs` or `events` in the second argument)
-- Everything else is just passed through and subject to the standard behaviour of whatever library you're using
+- Ability to pass a custom element constructor as the node name (first argument).
+- Explicit control over which DOM attributes to set (via `attrs: {}` in the second argument.)
+- Explicit control over which DOM events are bound (via `events: {}` in the second argument).
+- Explicit control over which DOM props are set (via `props: {}`) in the second argument).
+- Everything else is just passed through and subject to the standard behaviour of whatever library you're using.
+- The `ref` you pass will be wrapped so that `val` can do its thing.
 
 ## Requirements
 
@@ -53,18 +54,17 @@ The usage is simple. You import the wrapper and invoke it with the only argument
 React:
 
 ```js
-import { createElement } from 'react';
-import val from '@skatejs/val';
+import { createElement } from "react";
+import val from "@skatejs/val";
 
 export default val(createElement);
 ```
 
 Preact:
 
-
 ```js
-import { h } from 'preact';
-import val from '@skatejs/val';
+import { h } from "preact";
+import val from "@skatejs/val";
 
 export default val(h);
 ```
@@ -74,18 +74,18 @@ In your components, you'd then import your wrapped function instead of the one f
 ```js
 /** @jsx h */
 
-import h from 'your-wrapper';
-import { PureComponent } from 'react';
-import { render } from 'react-dom';
+import h from "your-wrapper";
+import { PureComponent } from "react";
+import { render } from "react-dom";
 
 class WebComponent extends HTMLElement {}
 class ReactComponent extends PureComponent {
-  render () {
+  render() {
     return <WebComponent />;
   }
 }
 
-render(<ReactComponent />, document.getElementById('root'));
+render(<ReactComponent />, document.getElementById("root"));
 ```
 
 ### Real DOM
@@ -94,7 +94,7 @@ Val ships with a default adapter that generates real DOM nodes. To do this, simp
 
 ```js
 /** @jsx h*/
-import { h } from '@skatejs/val';
+import { h } from "@skatejs/val";
 
 // <div>test</div>
 console.log(<div>test</div>.outerHTML);
@@ -104,43 +104,61 @@ Everything works as advertised, so you can still pass custom elements, attribute
 
 Being able to do this is immensely useful for testing real DOM and web components. Apply liberally!
 
-### Attributes
+### DOM attributes
 
 Attributes are specified using the `attrs` object.
 
 ```js
-import h from 'your-wrapper';
+import h from "your-wrapper";
 
-h('my-element', {
+h("my-element", {
   attrs: {
-    'my-attribute': 'some value'
+    "my-attribute": "some value"
   }
 });
 ```
 
-### Events and custom events
+### DOM events and custom events
 
 Events are bound using the `events` object. This works for any events, including custom events.
 
 ```js
-import h from 'your-wrapper';
+import h from "your-wrapper";
 
-h('my-element', {
+h("my-element", {
   events: {
-    click () {},
-    customevent () {}
+    click() {},
+    customevent() {}
   }
 });
 ```
 
-### Properties
+### DOM properties
 
-Properties are categorised as anything that is *not* `attrs` or `events`.
+Properties are categorised as anything that is _not_ `attrs` or `events`.
 
 ```js
-h('my-element', {
-  someProp: true
+h("my-element", {
+  props: {
+    someProp: true
+  }
 });
+```
+
+### Standard framework props
+
+Anything else is just passed through to your framework.
+
+```js
+// @jsx h
+
+import val from "@skatejs/val";
+import { createElement } from "react";
+
+const h = val(createElement);
+
+// The onClick prop gets passed through to React.
+<button onClick={() => {}} />;
 ```
 
 ### Custom element constructors
@@ -152,7 +170,7 @@ You can also use your web component constructor instead of the name that was pas
 class WebComponent extends HTMLElement {}
 
 // It must be defined first.
-customElements.define('web-component', WebComponent);
+customElements.define("web-component", WebComponent);
 
 // Now we can use it.
 h(WebComponent);
