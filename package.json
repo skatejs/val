@@ -25,7 +25,7 @@
     "@pika/plugin-build-node": "^0.3.14",
     "@pika/plugin-build-web": "^0.3.14",
     "@pika/plugin-standard-pkg": "^0.3.14",
-    "@skatejs/ssr": "0.19.1",
+    "@skatejs/ssr": "0.19.11",
     "jest": "^24.5.0"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",

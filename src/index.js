@@ -17,8 +17,8 @@ if (customElements) {
 // existing attributes and assumes that the supplied object will supply
 // all attributes that the applicator should care about, even ones that
 // should be removed.
-function applyAttrs (e, attrs) {
-  if(!attrs) return;
+function applyAttrs(e, attrs) {
+  if (!attrs) return;
 
   Object.keys(attrs).forEach(name => {
     const value = attrs[name];
@@ -30,7 +30,7 @@ function applyAttrs (e, attrs) {
   });
 }
 
-function applyEvents (e, events = {}) {
+function applyEvents(e, events = {}) {
   const handlers = cacheElementEventHandlers.get(e) || {};
   cacheElementEventHandlers.set(e, events);
 
@@ -51,29 +51,29 @@ function applyEvents (e, events = {}) {
 }
 
 // Sets props. Straight up.
-function applyProps (e, props) {
+function applyProps(e, props) {
   Object.keys(props || {}).forEach(name => {
     e[name] = props[name];
   });
 }
 
 // Ensures that if a ref was specified that it's called as normal.
-function applyRef (e, ref) {
+function applyRef(e, ref) {
   if (ref) {
     ref(e);
   }
 }
 
 // Ensures attrs, events and props are all set as the consumer intended.
-function ensureAttrs (objs) {
-  const { attrs, events, ref, key, dangerouslySetInnerHTML, ...props } = objs || {};
-  const newRef = ensureRef({ attrs, events, props, ref });
-  return { ref: newRef, key, dangerouslySetInnerHTML }
+function ensureProps(objs) {
+  const { attrs, events, props, ref, ...pass } = objs || {};
+  const newRef = ensureRef(attrs, events, props, ref);
+  return { ...pass, ref: newRef };
 }
 
 // Ensures a ref is supplied that set each member appropriately and that
 // the original ref is called.
-function ensureRef ({ attrs, events, props, ref }) {
+function ensureRef(attrs, events, props, ref) {
   return e => {
     if (e) {
       applyAttrs(e, attrs);
@@ -86,16 +86,28 @@ function ensureRef ({ attrs, events, props, ref }) {
 
 // Returns the custom element local name if it exists or the original
 // value.
-function ensureLocalName (lname) {
+function ensureLocalName(lname) {
   const temp = cacheCtorLocalNames.get(lname);
   return temp || lname;
 }
 
 // Default adapter for rendering DOM.
-function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
-  const node = typeof lname === 'function' ? new lname() : document.createElement(lname);
-  if (ref) ref(node);
-  chren.forEach(c => node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+function defaultCreateElement(lname, { ref, ...props }, ...chren) {
+  const node =
+    typeof lname === "function" ? new lname() : document.createElement(lname);
+
+  if (ref) {
+    ref(node);
+  }
+
+  for (const name in props) {
+    node[name] = props[name];
+  }
+
+  chren.forEach(c =>
+    node.appendChild(typeof c === "string" ? document.createTextNode(c) : c)
+  );
+
   return node;
 }
 
@@ -104,11 +116,11 @@ function defaultCreateElement (lname, { ref, ...attrs }, ...chren) {
 //
 // It requires support for:
 // - `ref`
-export default function val (createElement = defaultCreateElement) {
-  return function (lname, attrs, ...chren) {
+export default function val(createElement = defaultCreateElement) {
+  return function(lname, props, ...chren) {
     lname = ensureLocalName(lname);
-    attrs = ensureAttrs(attrs);
-    return createElement(lname, attrs, ...chren);
+    props = ensureProps(props);
+    return createElement(lname, props, ...chren);
   };
 }
 
