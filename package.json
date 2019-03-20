@@ -14,25 +14,19 @@
     "elements",
     "integration"
   ],
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "lib",
-    "es"
-  ],
   "scripts": {
-    "prepublish": "nwb build",
     "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.4.1",
+    "@babel/preset-react": "^7.0.0",
+    "@pika/pack": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-standard-pkg": "^0.3.14",
     "@skatejs/ssr": "0.19.1",
-    "babel-jest": "22.1.0",
-    "babel-preset-env": "1.6.1",
-    "babel-preset-react": "6.24.1",
-    "babel-preset-stage-0": "6.24.1",
-    "jest": "22.1.4",
-    "nwb": "0.21.3"
+    "jest": "^24.5.0"
   },
   "author": "Trey Shugart <treshugart@gmail.com>",
   "homepage": "https://github.com/skatejs/val",
@@ -41,12 +35,29 @@
   "version": "0.4.0",
   "babel": {
     "presets": [
-      "env",
-      "react",
-      "stage-0"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   },
   "jest": {
     "testEnvironment": "@skatejs/ssr/jest"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg",
+        {
+          "exclude": [
+            "__tests__/**/*"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
   }
 }
