@@ -167,11 +167,11 @@ You can also use your web component constructor instead of the name that was pas
 
 ```js
 // So we have the reference to pass to h().
-class WebComponent extends HTMLElement {}
+class CustomElement extends HTMLElement {}
 
 // It must be defined first.
-customElements.define("web-component", WebComponent);
+customElements.define("custom-element", CustomElement);
 
 // Now we can use it.
-h(WebComponent);
+h(CustomElement);
 ```
