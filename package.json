@@ -32,7 +32,7 @@
   "homepage": "https://github.com/skatejs/val",
   "license": "MIT",
   "repository": "https://github.com/skatejs/val",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "babel": {
     "presets": [
       "@babel/preset-env",
